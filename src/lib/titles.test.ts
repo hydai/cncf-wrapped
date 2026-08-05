@@ -18,7 +18,7 @@ describe('computeTitle', () => {
 
     expect(
       computeTitle(input({ metrics: { prs: 10, issues: 100, comments: 500, commits: 93 } })).id,
-    ).toBe('keyboard-warrior');
+    ).toBe('comment-maestro');
 
     expect(
       computeTitle(input({ metrics: { prs: 10, issues: 700, comments: 500, commits: 93 } })).id,
@@ -36,7 +36,7 @@ describe('computeTitle', () => {
   });
 
   it('ignores missing and zero metrics', () => {
-    expect(computeTitle(input({ metrics: { prs: null, issues: 0, comments: 3 } })).id).toBe('keyboard-warrior');
+    expect(computeTitle(input({ metrics: { prs: null, issues: 0, comments: 3 } })).id).toBe('comment-maestro');
   });
 
   it('adds "The Machine" flair only for top-10 overall rank', () => {

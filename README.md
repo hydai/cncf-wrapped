@@ -23,7 +23,7 @@ the PNG and flex on X, Slack, or Discord.
 - Yearly contributions and all-time totals (with PRs / issues breakdown)
 - A meme title decided by your highest yearly activity metric:
   - PRs → **Merge Machine**
-  - Comments → **Keyboard Warrior**
+  - Comments → **Comment Maestro**
   - Issues → **Bug Whisperer**
   - Commits → **Code Goblin**
   - a top-10 overall rank additionally earns **⚡ THE MACHINE**

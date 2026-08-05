@@ -1,4 +1,4 @@
-export type TitleId = 'merge-machine' | 'keyboard-warrior' | 'bug-whisperer' | 'code-goblin';
+export type TitleId = 'merge-machine' | 'comment-maestro' | 'bug-whisperer' | 'code-goblin';
 
 export interface TitleInfo {
   id: TitleId;
@@ -9,7 +9,7 @@ export interface TitleInfo {
 
 export const TITLES: Record<TitleId, TitleInfo> = {
   'merge-machine': { id: 'merge-machine', en: 'Merge Machine', zh: '合併機器', emoji: '🔀' },
-  'keyboard-warrior': { id: 'keyboard-warrior', en: 'Keyboard Warrior', zh: '鍵盤俠', emoji: '⌨️' },
+  'comment-maestro': { id: 'comment-maestro', en: 'Comment Maestro', zh: '評論大師', emoji: '🎼' },
   'bug-whisperer': { id: 'bug-whisperer', en: 'Bug Whisperer', zh: '蟲語者', emoji: '🐛' },
   'code-goblin': { id: 'code-goblin', en: 'Code Goblin', zh: '程式碼地精', emoji: '👺' },
 };
@@ -26,7 +26,7 @@ const METRIC_PRIORITY: Array<{ key: keyof MetricCounts; title: TitleId }> = [
   { key: 'prs', title: 'merge-machine' },
   { key: 'commits', title: 'code-goblin' },
   { key: 'issues', title: 'bug-whisperer' },
-  { key: 'comments', title: 'keyboard-warrior' },
+  { key: 'comments', title: 'comment-maestro' },
 ];
 
 export interface TitleResult {

@@ -17,8 +17,8 @@ export const MEME_LINES: Record<TitleId, MemeLine[]> = {
     { zh: 'Maintainer 看到你的名字，手就自動移向 Approve。', en: 'Maintainers see your name and the cursor drifts toward Approve.' },
     { zh: 'Rebase、squash、merge——你的一天比 Git 還忙。', en: 'Rebase, squash, merge — you out-throughput the pipeline.' },
   ],
-  'keyboard-warrior': [
-    { zh: '這串討論 87 樓，其中 42 樓是你。', en: 'That 87-comment thread? 42 of them are you.' },
+  'comment-maestro': [
+    { zh: '這串討論 128 樓，其中 64 樓是你。', en: 'That 128-comment thread? 64 of them are you.' },
     { zh: '別人留 +1，你留三個段落外加參考連結。', en: 'Others drop a +1. You drop three paragraphs and a bibliography.' },
     { zh: '你的 code review 比原本的 PR 還長。', en: 'Your reviews are longer than the PRs they review.' },
     { zh: 'Resolve conversation？不，你只 start conversation。', en: 'Resolve conversation? You only start conversations.' },

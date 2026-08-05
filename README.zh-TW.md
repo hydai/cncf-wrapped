@@ -22,7 +22,7 @@ Spotify Wrapped 風格的卡片，一鍵下載 / 複製 PNG，貼到 X、Slack�
 - 年度貢獻數、生涯總貢獻（含 PRs / Issues 細項）
 - 迷因稱號：由年度各 metric 中數量最高者決定
   - PRs →「Merge Machine 合併機器」
-  - Comments →「Keyboard Warrior 鍵盤俠」
+  - Comments →「Comment Maestro 評論大師」
   - Issues →「Bug Whisperer 蟲語者」
   - Commits →「Code Goblin 程式碼地精」
   - 年度排名進 Top 10 再加掛 **⚡ THE MACHINE**
