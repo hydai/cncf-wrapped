@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { CardPage } from './components/CardPage';
+import { FortunePage } from './components/FortunePage';
 import { HomePage } from './components/HomePage';
-import { useUserParam } from './hooks/useUserParam';
+import { useRoute } from './hooks/useRoute';
 import { useI18n } from './i18n/context';
 import type { Lang } from './i18n/lang';
 
@@ -29,23 +30,35 @@ function LangToggle() {
 }
 
 export default function App() {
-  const { user, navigate } = useUserParam();
+  const { route, navigate } = useRoute();
   const { t } = useI18n();
 
   useEffect(() => {
-    document.title = user ? t.docTitleUser(user) : t.docTitleHome;
-  }, [user, t]);
+    document.title =
+      route.view === 'card'
+        ? t.docTitleUser(route.login)
+        : route.view === 'fortune'
+          ? t.docTitleFortune(route.login)
+          : t.docTitleHome;
+  }, [route, t]);
 
   return (
     <div className="page">
       <header className="page-top">
-        <button className="page-brand" onClick={() => navigate(null)} aria-label={t.brandAria}>
+        <button className="page-brand" onClick={() => navigate({ view: 'home' })} aria-label={t.brandAria}>
           CNCF WRAPPED
         </button>
         <LangToggle />
       </header>
 
-      {user ? <CardPage key={user} login={user} onNavigate={navigate} /> : <HomePage onSubmit={navigate} />}
+      {route.view === 'home' && (
+        <HomePage
+          onSubmit={(login) => navigate({ view: 'card', login })}
+          onFortune={(login) => navigate({ view: 'fortune', login })}
+        />
+      )}
+      {route.view === 'card' && <CardPage key={route.login} login={route.login} onNavigate={navigate} />}
+      {route.view === 'fortune' && <FortunePage key={route.login} login={route.login} onNavigate={navigate} />}
 
       <footer className="page-foot">{t.pageFoot}</footer>
     </div>

@@ -1,11 +1,6 @@
 import { getFontEmbedCSS, toPng } from 'html-to-image';
-import { CARD_HEIGHT, CARD_WIDTH } from '../components/WrappedCard';
 
-export const EXPORT_PIXEL_RATIO = 2; // 480x640 -> 960x1280 PNG
-
-export function exportFileName(login: string): string {
-  return `cncf-wrapped-${login}.png`;
-}
+export const EXPORT_PIXEL_RATIO = 2;
 
 // Safari's foreignObject rendering sometimes misses fonts/images on the first
 // pass; rendering twice and keeping the second result is the standard fix.
@@ -13,8 +8,8 @@ const needsDoubleRender = /^((?!chrome|android).)*safari/i.test(
   typeof navigator === 'undefined' ? '' : navigator.userAgent,
 );
 
-// Embedding font CSS walks every @font-face rule (Noto Sans TC has hundreds of
-// unicode-range subsets), so compute it once and reuse it for every export.
+// Embedding font CSS walks every @font-face rule (Noto CJK families have
+// hundreds of unicode-range subsets), so compute it once and reuse it.
 let fontCssPromise: Promise<string> | null = null;
 
 async function renderPng(node: HTMLElement): Promise<string> {
@@ -27,9 +22,11 @@ async function renderPng(node: HTMLElement): Promise<string> {
     throw err;
   }
 
+  // The export node is the unscaled card root: offset size = design size,
+  // unaffected by the responsive scale transform on its ancestors.
   const options = {
-    width: CARD_WIDTH,
-    height: CARD_HEIGHT,
+    width: node.offsetWidth,
+    height: node.offsetHeight,
     pixelRatio: EXPORT_PIXEL_RATIO,
     fontEmbedCSS,
   };
@@ -50,11 +47,11 @@ export async function cardToPngBlob(node: HTMLElement): Promise<Blob> {
   return new Blob([buf], { type: 'image/png' });
 }
 
-export async function downloadCard(node: HTMLElement, login: string): Promise<void> {
+export async function downloadCard(node: HTMLElement, fileName: string): Promise<void> {
   const dataUrl = await cardToPngDataUrl(node);
   const a = document.createElement('a');
   a.href = dataUrl;
-  a.download = exportFileName(login);
+  a.download = fileName;
   a.click();
 }
 
@@ -82,9 +79,9 @@ export function canShareFiles(): boolean {
   );
 }
 
-export async function shareCard(node: HTMLElement, login: string, text: string): Promise<void> {
+export async function shareCard(node: HTMLElement, fileName: string, text: string): Promise<void> {
   const blob = await cardToPngBlob(node);
-  const file = new File([blob], exportFileName(login), { type: 'image/png' });
+  const file = new File([blob], fileName, { type: 'image/png' });
   if (!navigator.canShare({ files: [file] })) {
     throw new Error('sharing files is not supported here');
   }

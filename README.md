@@ -30,6 +30,23 @@ the PNG and flex on X, Slack, or Discord.
 - One meme line per title, drawn from a bilingual pool
 - Full zh-TW / English UI toggle (`?lang=zh|en` works in share links)
 
+## Daily dev fortune 🎋
+
+A temple-lottery-style side dish at `?fortune=<github-id>` (buttons on the
+home page and under every card): draw your **dev fortune of the day** —
+fortune level (大吉 → CURSED (REVERTIBLE)), a geeky fortune poem, DO / DON'T
+lists, a lucky git command, a lucky hour seasoned with your real yearly
+commit count, and a lucky emoji.
+
+- **Deterministic**: seed = hash(login + local date), so the same dev on the
+  same day always draws the same fortune — in both languages. Compare with
+  friends; come back tomorrow for a new one.
+- **Real data as blessing material**: the card is "consecrated" with your
+  actual DevStats numbers (career contributions, yearly commits, rank), with
+  a playful fallback for unknown/unranked users.
+- Exports to PNG like the main card. For entertainment only — the data is
+  real, the fortune is not.
+
 ## Data source & how the numbers work
 
 Everything comes from the public [CNCF DevStats](https://devstats.cncf.io)

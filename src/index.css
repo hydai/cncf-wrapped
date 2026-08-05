@@ -302,6 +302,10 @@ a {
   width: min(480px, 100%);
 }
 
+.fortune-stage {
+  width: min(430px, 100%);
+}
+
 .card-scaler {
   position: relative;
   width: 100%;

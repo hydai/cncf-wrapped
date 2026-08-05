@@ -10,7 +10,15 @@ import {
 
 type Action = 'download' | 'copy' | 'share';
 
-export function ExportBar({ getNode, login }: { getNode: () => HTMLElement | null; login: string }) {
+export function ExportBar({
+  getNode,
+  fileName,
+  shareText,
+}: {
+  getNode: () => HTMLElement | null;
+  fileName: string;
+  shareText: string;
+}) {
   const { t } = useI18n();
   const [busy, setBusy] = useState<Action | null>(null);
   const [message, setMessage] = useState<string | null>(null);
@@ -30,7 +38,7 @@ export function ExportBar({ getNode, login }: { getNode: () => HTMLElement | nul
     setBusy(action);
     try {
       if (action === 'download') {
-        await downloadCard(node, login);
+        await downloadCard(node, fileName);
         flash(t.exportDoneDownload);
       }
       if (action === 'copy') {
@@ -38,7 +46,7 @@ export function ExportBar({ getNode, login }: { getNode: () => HTMLElement | nul
         flash(t.exportDoneCopy);
       }
       if (action === 'share') {
-        await shareCard(node, login, t.shareText(login));
+        await shareCard(node, fileName, shareText);
         flash(t.exportDoneShare);
       }
     } catch (err) {
@@ -50,26 +58,20 @@ export function ExportBar({ getNode, login }: { getNode: () => HTMLElement | nul
     }
   };
 
-  const labels: Record<Action, string> = {
-    download: t.exportDownload,
-    copy: t.exportCopy,
-    share: t.exportShare,
-  };
-
   return (
     <>
       <div className="card-actions">
         <button className="btn" onClick={() => run('download')} disabled={busy !== null}>
-          {busy === 'download' ? t.exportBusy : labels.download}
+          {busy === 'download' ? t.exportBusy : t.exportDownload}
         </button>
         {canCopyImage() && (
           <button className="btn btn-ghost" onClick={() => run('copy')} disabled={busy !== null}>
-            {busy === 'copy' ? t.exportBusy : labels.copy}
+            {busy === 'copy' ? t.exportBusy : t.exportCopy}
           </button>
         )}
         {canShareFiles() && (
           <button className="btn btn-ghost" onClick={() => run('share')} disabled={busy !== null}>
-            {busy === 'share' ? t.exportBusy : labels.share}
+            {busy === 'share' ? t.exportBusy : t.exportShare}
           </button>
         )}
       </div>

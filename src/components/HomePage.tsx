@@ -4,23 +4,39 @@ import { useI18n } from '../i18n/context';
 
 const LOGIN_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/i;
 
-export function HomePage({ onSubmit }: { onSubmit: (login: string) => void }) {
+export function HomePage({
+  onSubmit,
+  onFortune,
+}: {
+  onSubmit: (login: string) => void;
+  onFortune: (login: string) => void;
+}) {
   const { t } = useI18n();
   const [value, setValue] = useState('');
   const [errorKind, setErrorKind] = useState<'empty' | 'invalid' | null>(null);
 
-  const submit = (e: FormEvent) => {
-    e.preventDefault();
+  const validate = (): string | null => {
     const login = normalizeLogin(value);
     if (!login) {
       setErrorKind('empty');
-      return;
+      return null;
     }
     if (login.length > 39 || !LOGIN_RE.test(login)) {
       setErrorKind('invalid');
-      return;
+      return null;
     }
-    onSubmit(login);
+    return login;
+  };
+
+  const submit = (e: FormEvent) => {
+    e.preventDefault();
+    const login = validate();
+    if (login) onSubmit(login);
+  };
+
+  const drawFortune = () => {
+    const login = validate();
+    if (login) onFortune(login);
   };
 
   return (
@@ -55,6 +71,9 @@ export function HomePage({ onSubmit }: { onSubmit: (login: string) => void }) {
         </label>
         <button className="btn" type="submit">
           {t.homeSubmit}
+        </button>
+        <button className="btn btn-ghost" type="button" onClick={drawFortune}>
+          {t.fortuneEntry}
         </button>
         {errorKind && <p className="home-error">{errorKind === 'empty' ? t.errEmpty : t.errInvalid}</p>}
       </form>

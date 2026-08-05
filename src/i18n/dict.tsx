@@ -64,6 +64,28 @@ export interface Dict {
   // methodology note (below the card, outside the PNG export node)
   methodTitle: string;
   methodItems: Array<{ term: string; body: ReactNode }>;
+
+  // daily fortune
+  docTitleFortune: (login: string) => string;
+  fortuneEntry: string;
+  fortuneBackToCard: string;
+  fortuneTitle: string;
+  fortuneAlmanac: (ganzhi: string) => string;
+  fortuneGuardian: (count: string, rank: string | null) => string;
+  fortuneGuardianFallback: string;
+  fortuneDo: string;
+  fortuneDont: string;
+  fortuneLuckyCmd: string;
+  fortuneLuckyHour: string;
+  fortuneLuckyHourNote: string;
+  fortuneLuckyEmoji: string;
+  fortuneLuckyEmojiNote: string;
+  fortuneBasisFull: (login: string, career: string, commits: string, rank: string) => string;
+  fortuneBasisCareer: (login: string, career: string) => string;
+  fortuneBasisAnon: (login: string) => string;
+  fortuneBrand: string;
+  fortuneHint: string;
+  fortuneShareText: (login: string) => string;
 }
 
 const zh: Dict = {
@@ -195,6 +217,28 @@ const zh: Dict = {
       ),
     },
   ],
+
+  docTitleFortune: (login) => `${login} 的今日開發運勢`,
+  fortuneEntry: '抽今日開發運勢 🎋',
+  fortuneBackToCard: '看 Wrapped 年度卡片 →',
+  fortuneTitle: '今日開發運勢',
+  fortuneAlmanac: (ganzhi) => `農曆${ganzhi}年 · 開源黃曆`,
+  fortuneGuardian: (count, rank) => `本命 metric：Commits（去年 ${count} 次${rank ? ` · 全 CNCF #${rank}` : ''}）`,
+  fortuneGuardianFallback: '無名高人 · 修行中',
+  fortuneDo: '宜',
+  fortuneDont: '忌',
+  fortuneLuckyCmd: '幸運指令',
+  fortuneLuckyHour: '幸運時辰',
+  fortuneLuckyHourNote: 'commit 最順的時段',
+  fortuneLuckyEmoji: '幸運 Emoji',
+  fortuneLuckyEmojiNote: '今日 PR 描述必備',
+  fortuneBasisFull: (login, career, commits, rank) =>
+    `本籤以 ${login} 的真實修行值開光：生涯 ${career} 次貢獻 · 年度 Commits ${commits}（#${rank} 高人）`,
+  fortuneBasisCareer: (login, career) => `本籤以 ${login} 的真實修行值開光：生涯 ${career} 次貢獻 · 年度榜外，深藏不露`,
+  fortuneBasisAnon: (login) => `本籤以「${login}」之名開光：DevStats 查無修行紀錄——無名高人，仍可抽籤`,
+  fortuneBrand: 'CNCF WRAPPED · 僅供娛樂——資料是真的，運勢是玩的',
+  fortuneHint: '同一人同一天結果固定，抽到的可以互相比較',
+  fortuneShareText: (login) => `@${login} 的今日開發運勢 🎋`,
 };
 
 const en: Dict = {
@@ -326,6 +370,30 @@ const en: Dict = {
       ),
     },
   ],
+
+  docTitleFortune: (login) => `${login}'s dev fortune`,
+  fortuneEntry: "Draw today's dev fortune 🎋",
+  fortuneBackToCard: 'See the Wrapped card →',
+  fortuneTitle: "TODAY'S DEV FORTUNE",
+  fortuneAlmanac: () => 'Open-Source Almanac',
+  fortuneGuardian: (count, rank) => `Guardian metric: Commits (${count} last year${rank ? ` · #${rank} in CNCF` : ''})`,
+  fortuneGuardianFallback: 'Anonymous cultivator · still grinding',
+  fortuneDo: 'DO',
+  fortuneDont: "DON'T",
+  fortuneLuckyCmd: 'LUCKY COMMAND',
+  fortuneLuckyHour: 'LUCKY HOUR',
+  fortuneLuckyHourNote: 'prime commit window',
+  fortuneLuckyEmoji: 'LUCKY EMOJI',
+  fortuneLuckyEmojiNote: "today's PR essential",
+  fortuneBasisFull: (login, career, commits, rank) =>
+    `Blessed with ${login}'s real cultivation: ${career} career contributions · ${commits} commits this year (sage #${rank})`,
+  fortuneBasisCareer: (login, career) =>
+    `Blessed with ${login}'s real cultivation: ${career} career contributions · off the yearly board, powers concealed`,
+  fortuneBasisAnon: (login) =>
+    `Blessed in the name of "${login}": no cultivation records on DevStats — an unwritten legend, fortune still granted`,
+  fortuneBrand: 'CNCF WRAPPED · For fun only — the data is real, the fortune is not',
+  fortuneHint: 'Same dev + same day = same draw. Compare with friends.',
+  fortuneShareText: (login) => `@${login}'s dev fortune today 🎋`,
 };
 
 export const DICTS: Record<Lang, Dict> = { zh, en };
