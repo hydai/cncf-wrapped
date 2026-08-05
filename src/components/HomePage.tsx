@@ -61,6 +61,10 @@ export function HomePage({ onSubmit }: { onSubmit: (login: string) => void }) {
         {error && <p className="home-error">{error}</p>}
       </form>
 
+      <button className="home-sample" onClick={() => onSubmit('hydai')}>
+        還沒想好？先看範例卡片 →
+      </button>
+
       <p className="home-note">
         只計算 CNCF 專案的貢獻 ・ 資料來源{' '}
         <a href="https://devstats.cncf.io" target="_blank" rel="noreferrer">
