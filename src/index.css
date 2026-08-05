@@ -286,16 +286,6 @@ a {
   color: var(--lime);
 }
 
-.home-note {
-  font-size: 12.5px;
-  color: rgba(255, 248, 242, 0.45);
-  line-height: 1.9;
-}
-
-.home-note a {
-  color: rgba(255, 248, 242, 0.6);
-}
-
 /* ---------- card page ---------- */
 
 .card-stage {

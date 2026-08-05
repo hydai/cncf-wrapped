@@ -81,8 +81,6 @@ export function HomePage({
       <button className="home-sample" onClick={() => onSubmit('hydai')}>
         {t.homeSample}
       </button>
-
-      <p className="home-note">{t.homeNote}</p>
     </main>
   );
 }

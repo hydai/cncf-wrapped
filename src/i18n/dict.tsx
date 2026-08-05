@@ -14,7 +14,6 @@ export interface Dict {
   homePlaceholder: string;
   homeSubmit: string;
   homeSample: string;
-  homeNote: ReactNode;
   errEmpty: string;
   errInvalid: string;
 
@@ -97,7 +96,7 @@ const zh: Dict = {
     <>
       非官方粉絲專案 ・ 資料來自{' '}
       <a href="https://devstats.cncf.io" target="_blank" rel="noreferrer">
-        CNCF DevStats
+        devstats.cncf.io
       </a>
     </>
   ),
@@ -113,14 +112,6 @@ const zh: Dict = {
   homePlaceholder: 'github-id（試試 hydai）',
   homeSubmit: '產生我的卡片 →',
   homeSample: '還沒想好？先看範例卡片 →',
-  homeNote: (
-    <>
-      只計算 CNCF 專案的貢獻 ・ 資料來源{' '}
-      <a href="https://devstats.cncf.io" target="_blank" rel="noreferrer">
-        devstats.cncf.io
-      </a>
-    </>
-  ),
   errEmpty: '先輸入一個 GitHub ID 吧。',
   errInvalid: '這看起來不像 GitHub ID（只能有字母、數字和 -）。',
 
@@ -148,7 +139,7 @@ const zh: Dict = {
     '正在計算你榨乾了多少 CI 分鐘…',
     '正在跟 15,000 個 repo 對帳…',
   ],
-  loadingFine: '資料來源：devstats.cncf.io（免費的公共服務，請溫柔對待）',
+  loadingFine: '免費的公共 API 有時需要想一下，請溫柔等待 🙏',
   nfTitle: (
     <>
       404
@@ -250,7 +241,7 @@ const en: Dict = {
     <>
       Unofficial fan project · data from{' '}
       <a href="https://devstats.cncf.io" target="_blank" rel="noreferrer">
-        CNCF DevStats
+        devstats.cncf.io
       </a>
     </>
   ),
@@ -266,14 +257,6 @@ const en: Dict = {
   homePlaceholder: 'github-id (try hydai)',
   homeSubmit: 'Make my card →',
   homeSample: 'Not sure yet? See an example →',
-  homeNote: (
-    <>
-      CNCF projects only · data from{' '}
-      <a href="https://devstats.cncf.io" target="_blank" rel="noreferrer">
-        devstats.cncf.io
-      </a>
-    </>
-  ),
   errEmpty: 'Type a GitHub ID first.',
   errInvalid: "That doesn't look like a GitHub ID (letters, digits and - only).",
 
@@ -301,7 +284,7 @@ const en: Dict = {
     'Calculating how many CI minutes you burned…',
     'Reconciling 15,000 repos…',
   ],
-  loadingFine: 'data: devstats.cncf.io (a free public service — be gentle)',
+  loadingFine: 'free public APIs need a moment sometimes — be gentle 🙏',
   nfTitle: (
     <>
       404
