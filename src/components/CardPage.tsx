@@ -3,6 +3,7 @@ import { useWrapped } from '../hooks/useWrapped';
 import { useFitScale } from '../hooks/useFitScale';
 import { pickMemeLine } from '../lib/copy';
 import { CARD_WIDTH, WrappedCard } from './WrappedCard';
+import { ExportBar } from './ExportBar';
 import { ErrorScreen, LoadingScreen, NotFoundScreen } from './StatusScreens';
 
 export function CardPage({ login, onNavigate }: { login: string; onNavigate: (login: string | null) => void }) {
@@ -25,7 +26,6 @@ export function CardPage({ login, onNavigate }: { login: string; onNavigate: (lo
         <div className="card-stage">
           <div className="card-scaler" ref={ref}>
             <div
-              ref={cardRef}
               style={{
                 position: 'absolute',
                 top: 0,
@@ -34,16 +34,19 @@ export function CardPage({ login, onNavigate }: { login: string; onNavigate: (lo
                 transformOrigin: 'top left',
               }}
             >
-              <WrappedCard data={state.data} memeLine={memeLine} />
+              <WrappedCard cardRef={cardRef} data={state.data} memeLine={memeLine} />
             </div>
           </div>
         </div>
       )}
 
       {state.phase === 'ok' && (
-        <button className="card-switch" onClick={() => onNavigate(null)}>
-          換一個 GitHub ID →
-        </button>
+        <>
+          <ExportBar getNode={() => cardRef.current} login={state.data.login} />
+          <button className="card-switch" onClick={() => onNavigate(null)}>
+            換一個 GitHub ID →
+          </button>
+        </>
       )}
     </>
   );

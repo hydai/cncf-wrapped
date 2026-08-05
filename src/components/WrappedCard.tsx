@@ -30,14 +30,22 @@ function Stat({ label, value, tone }: { label: string; value: string; tone: 'lim
   );
 }
 
-export function WrappedCard({ data, memeLine }: { data: WrappedData; memeLine: string }) {
+export function WrappedCard({
+  data,
+  memeLine,
+  cardRef,
+}: {
+  data: WrappedData;
+  memeLine: string;
+  cardRef?: React.Ref<HTMLDivElement>;
+}) {
   const { career, yearly, title } = data;
   const info = TITLES[title.id];
   const ranked = yearly.rank !== null;
   const hero = ranked ? `#${formatNumber(yearly.rank as number)}` : formatNumber(career.contributions);
 
   return (
-    <div className="wrap-card">
+    <div className="wrap-card" ref={cardRef}>
       <span className="wc-spark wc-spark-1">✦</span>
       <span className="wc-spark wc-spark-2">✦</span>
       <span className="wc-spark wc-spark-3">✦</span>
