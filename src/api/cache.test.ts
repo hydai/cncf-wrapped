@@ -69,6 +69,17 @@ describe('cached', () => {
     expect(fn).toHaveBeenCalledTimes(1);
   });
 
+  it('dedupes concurrent loads of the same key', async () => {
+    let release!: (v: string) => void;
+    const fn = vi.fn(() => new Promise<string>((r) => (release = r)));
+    const a = cached('dedupe', fn);
+    const b = cached('dedupe', fn);
+    expect(fn).toHaveBeenCalledTimes(1);
+    release('x');
+    expect(await a).toBe('x');
+    expect(await b).toBe('x');
+  });
+
   it('does not cache failures', async () => {
     const fn = vi
       .fn<() => Promise<string>>()

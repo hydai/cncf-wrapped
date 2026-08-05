@@ -55,7 +55,20 @@ export function cacheSet<T>(key: string, value: T, ttlMs: number = DEFAULT_TTL_M
 export async function cached<T>(key: string, fn: () => Promise<T>, ttlMs: number = DEFAULT_TTL_MS): Promise<T> {
   const hit = cacheGet<T>(key);
   if (hit !== undefined) return hit;
-  const value = await fn();
-  cacheSet(key, value, ttlMs);
-  return value;
+  const pending = inflight.get(key);
+  if (pending) return pending as Promise<T>;
+  const load = (async () => {
+    try {
+      const value = await fn();
+      cacheSet(key, value, ttlMs);
+      return value;
+    } finally {
+      inflight.delete(key);
+    }
+  })();
+  inflight.set(key, load);
+  return load;
 }
+
+// Dedupes concurrent loads of the same key (e.g. React StrictMode double effects).
+const inflight = new Map<string, Promise<unknown>>();
