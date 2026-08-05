@@ -5,6 +5,7 @@ import { useI18n } from '../i18n/context';
 import { getMemeLine, pickMemeLineIndex } from '../lib/copy';
 import { CARD_WIDTH, WrappedCard } from './WrappedCard';
 import { ExportBar } from './ExportBar';
+import { MethodologyNote } from './MethodologyNote';
 import { ErrorScreen, LoadingScreen, NotFoundScreen } from './StatusScreens';
 
 export function CardPage({ login, onNavigate }: { login: string; onNavigate: (login: string | null) => void }) {
@@ -47,6 +48,7 @@ export function CardPage({ login, onNavigate }: { login: string; onNavigate: (lo
       {state.phase === 'ok' && (
         <>
           <ExportBar getNode={() => cardRef.current} login={state.data.login} />
+          <MethodologyNote />
           <button className="card-switch" onClick={() => onNavigate(null)}>
             {t.switchUser}
           </button>

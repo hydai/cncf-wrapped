@@ -60,6 +60,10 @@ export interface Dict {
   exportFailed: string;
   exportHint: string;
   shareText: (login: string) => string;
+
+  // methodology note (below the card, outside the PNG export node)
+  methodTitle: string;
+  methodItems: Array<{ term: string; body: ReactNode }>;
 }
 
 const zh: Dict = {
@@ -160,6 +164,37 @@ const zh: Dict = {
   exportFailed: '匯出失敗了 😵 再試一次？',
   exportHint: '產生 PNG 後貼到 X / Slack / Discord，就是你的年度戰績。',
   shareText: (login) => `我的 CNCF Wrapped：@${login}`,
+
+  methodTitle: 'ℹ️ 這些數字怎麼算',
+  methodItems: [
+    {
+      term: '排名',
+      body: '直接來自 CNCF DevStats 的 DevActCnt API（All CNCF ・ 過去一年 ・ Contributions）。排名由 DevStats 計算，本站原樣呈現、不加工。',
+    },
+    {
+      term: '上榜貢獻者總數',
+      body: '同一個 API 不指定 github_id 時回傳的排行榜長度。榜單有貢獻門檻、低於門檻不入榜，所以這個數字遠小於全站 contributors 總數。',
+    },
+    {
+      term: 'TOP X%',
+      body: '排名 ÷ 上榜總數 × 100，無條件進位到小數一位（寧可低估、不誇大）。語意是「上榜貢獻者中的前 X%」，不是全體 CNCF 貢獻者中的百分位。',
+    },
+    {
+      term: '榜外使用者',
+      body: '未達門檻就不顯示排名與百分比，只顯示貢獻數——默默耕耘也是貢獻。',
+    },
+    {
+      term: '資料來源',
+      body: (
+        <>
+          <a href="https://devstats.cncf.io" target="_blank" rel="noreferrer">
+            devstats.cncf.io
+          </a>
+          ，資料約每小時更新；本站另有 1 小時快取，所以你剛拿到的 merge 可能要晚一點才會入帳。
+        </>
+      ),
+    },
+  ],
 };
 
 const en: Dict = {
@@ -227,14 +262,14 @@ const en: Dict = {
     <>
       404
       <br />
-      NEVER HEARD OF ’EM
+      NEVER HEARD OF 'EM
     </>
   ),
   nfBody: (login) => (
     <>
-      DevStats searched every corner of the CNCF and found no trace of <strong>“{login}”</strong>.
+      DevStats searched every corner of the CNCF and found no trace of <strong>"{login}"</strong>.
       <br />
-      Either that’s a typo, or your cloud-native era hasn’t started yet.
+      Either that's a typo, or your cloud-native era hasn't started yet.
     </>
   ),
   nfFine: 'Only CNCF projects count here (Kubernetes, etcd, Envoy…) — not all of GitHub.',
@@ -260,6 +295,37 @@ const en: Dict = {
   exportFailed: 'Export failed 😵 Try again?',
   exportHint: 'Export the PNG and drop it in X / Slack / Discord — instant flex.',
   shareText: (login) => `My CNCF Wrapped: @${login}`,
+
+  methodTitle: 'ℹ️ How the numbers work',
+  methodItems: [
+    {
+      term: 'Rank',
+      body: 'Straight from the CNCF DevStats DevActCnt API (All CNCF · last year · Contributions). DevStats computes it; this site just displays it.',
+    },
+    {
+      term: 'Ranked contributors',
+      body: 'The number of rows the same API returns without a github_id. The leaderboard cuts off below a contribution threshold, so it is far smaller than the site-wide contributor count.',
+    },
+    {
+      term: 'Top X%',
+      body: 'rank ÷ ranked total × 100, rounded up to one decimal — we would rather undersell you than overstate. It is your percentile among ranked contributors, not among all CNCF contributors.',
+    },
+    {
+      term: 'Unranked users',
+      body: 'Below the cutoff there is no rank and no percentile — just contribution counts. Lurking is still contributing.',
+    },
+    {
+      term: 'Data',
+      body: (
+        <>
+          <a href="https://devstats.cncf.io" target="_blank" rel="noreferrer">
+            devstats.cncf.io
+          </a>
+          , refreshed roughly every hour; this site caches responses for another hour, so a fresh merge may take a moment to land.
+        </>
+      ),
+    },
+  ],
 };
 
 export const DICTS: Record<Lang, Dict> = { zh, en };

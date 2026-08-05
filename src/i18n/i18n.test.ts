@@ -36,4 +36,12 @@ describe('DICTS', () => {
     expect(DICTS.zh.loadingLines.length).toBe(DICTS.en.loadingLines.length);
     expect(DICTS.zh.loadingLines.length).toBeGreaterThan(0);
   });
+
+  it('keeps methodology items aligned across languages', () => {
+    expect(DICTS.zh.methodItems.length).toBe(DICTS.en.methodItems.length);
+    expect(DICTS.zh.methodItems.length).toBeGreaterThan(0);
+    for (const dict of [DICTS.zh, DICTS.en]) {
+      for (const item of dict.methodItems) expect(item.term.trim()).not.toBe('');
+    }
+  });
 });

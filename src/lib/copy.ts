@@ -12,8 +12,8 @@ export interface MemeLine {
 
 export const MEME_LINES: Record<TitleId, MemeLine[]> = {
   'merge-machine': [
-    { zh: '你的 PR 比我的人生規劃還多。', en: 'You’ve opened more PRs than most people open tabs.' },
-    { zh: 'CI 還沒跑完，你的下一個 PR 已經開好了。', en: 'CI hasn’t finished and your next PR is already up.' },
+    { zh: '你的 PR 比我的人生規劃還多。', en: "You've opened more PRs than most people open tabs." },
+    { zh: 'CI 還沒跑完，你的下一個 PR 已經開好了。', en: "CI hasn't finished and your next PR is already up." },
     { zh: 'Maintainer 看到你的名字，手就自動移向 Approve。', en: 'Maintainers see your name and the cursor drifts toward Approve.' },
     { zh: 'Rebase、squash、merge——你的一天比 Git 還忙。', en: 'Rebase, squash, merge — you out-throughput the pipeline.' },
   ],
@@ -24,16 +24,16 @@ export const MEME_LINES: Record<TitleId, MemeLine[]> = {
     { zh: 'Resolve conversation？不，你只 start conversation。', en: 'Resolve conversation? You only start conversations.' },
   ],
   'bug-whisperer': [
-    { zh: '你不找 bug，bug 自己來找你。', en: 'You don’t hunt bugs. Bugs come to confess.' },
+    { zh: '你不找 bug，bug 自己來找你。', en: "You don't hunt bugs. Bugs come to confess." },
     { zh: 'Steps to reproduce：1. 你出現。', en: 'Steps to reproduce: 1. You show up.' },
-    { zh: 'Maintainer 最怕收到你的 issue——因為都是真的。', en: 'Maintainers fear your issues — because they’re always real.' },
-    { zh: '你開的 issue 數，比某些專案的 star 還多。', en: 'You’ve filed more issues than some projects have stars.' },
+    { zh: 'Maintainer 最怕收到你的 issue——因為都是真的。', en: "Maintainers fear your issues — because they're always real." },
+    { zh: '你開的 issue 數，比某些專案的 star 還多。', en: "You've filed more issues than some projects have stars." },
   ],
   'code-goblin': [
-    { zh: '凌晨三點的 commit，都是你的。', en: 'Every 3 AM commit? Yeah, that’s you.' },
-    { zh: 'git blame 挖到最後，都是你。', en: 'Run git blame long enough and it’s just your name.' },
+    { zh: '凌晨三點的 commit，都是你的。', en: "Every 3 AM commit? Yeah, that's you." },
+    { zh: 'git blame 挖到最後，都是你。', en: "Run git blame long enough and it's just your name." },
     { zh: '一天不 push，渾身不對勁。', en: 'A day without a push just feels wrong.' },
-    { zh: 'main branch 不是保護分支，是你家。', en: 'main isn’t a protected branch. It’s your living room.' },
+    { zh: 'main branch 不是保護分支，是你家。', en: "main isn't a protected branch. It's your living room." },
   ],
 };
 

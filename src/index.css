@@ -336,6 +336,65 @@ a {
   color: var(--lime);
 }
 
+/* ---------- methodology note ---------- */
+
+.method {
+  width: min(480px, 100%);
+  border: 1px solid rgba(255, 248, 242, 0.13);
+  background: rgba(255, 255, 255, 0.035);
+  border-radius: 16px;
+}
+
+.method summary {
+  cursor: pointer;
+  user-select: none;
+  padding: 12px 18px;
+  font-size: 13px;
+  color: rgba(255, 248, 242, 0.58);
+  transition: color 0.12s ease;
+}
+
+.method summary:hover {
+  color: var(--lime);
+}
+
+.method[open] summary {
+  color: rgba(255, 248, 242, 0.85);
+  border-bottom: 1px dashed rgba(255, 248, 242, 0.16);
+}
+
+.method-list {
+  margin: 0;
+  padding: 14px 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+
+.method-item dt {
+  font-weight: 700;
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  color: rgba(255, 248, 242, 0.85);
+  margin-bottom: 3px;
+}
+
+.method-item dd {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: rgba(255, 248, 242, 0.6);
+}
+
+.method a {
+  color: rgba(255, 248, 242, 0.8);
+}
+
+.method a:hover {
+  color: var(--lime);
+}
+
 /* ---------- status screens ---------- */
 
 .status {
