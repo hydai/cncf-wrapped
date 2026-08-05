@@ -54,6 +54,47 @@ a {
   gap: 22px;
 }
 
+.page-top {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.lang-toggle {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1.5px solid rgba(255, 248, 242, 0.3);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.lang-toggle button {
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 1;
+  padding: 6px 12px;
+  border-radius: 999px;
+  color: rgba(255, 248, 242, 0.65);
+  transition: color 0.12s ease, background-color 0.12s ease;
+}
+
+.lang-toggle button:hover {
+  color: var(--lime);
+}
+
+.lang-toggle button.active {
+  background: var(--lime);
+  color: #150425;
+}
+
 .page-brand {
   border: 0;
   background: none;

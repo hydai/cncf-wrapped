@@ -41,6 +41,8 @@ Spotify Wrapped 風格的卡片，一鍵下載 / 複製 PNG，貼到 X、Slack�
 
 - Vite + React + TypeScript 純靜態 SPA（GitHub Pages，無後端）
 - 卡片路由用 `?user=<github-id>` query param，Pages 子路徑友善
+- 介面 zh-TW / English 雙語：右上角切換、`?lang=zh|en` 可指定分享語言、
+  選擇記在 localStorage（typed dictionary + useContext，零 i18n 框架）
 - PNG 由瀏覽器端 [html-to-image](https://github.com/bubkoo/html-to-image) 產生：
   下載 / Clipboard API 複製 / Web Share API（行動裝置）
 - 頭像經 `fetch → blob → dataURL` 載入，避免 canvas taint

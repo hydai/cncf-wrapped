@@ -308,11 +308,12 @@
   text-shadow: 0.075em 0.075em 0 var(--pink);
 }
 
-.wc-title-zh {
-  font-weight: 900;
-  font-size: 15px;
-  letter-spacing: 0.3em;
-  color: var(--lime);
+/* Chinese titles render on one line with wider tracking. */
+.wc-title-word-zh {
+  font-family: var(--font-body);
+  font-size: 31px;
+  line-height: 1.25;
+  letter-spacing: 0.14em;
 }
 
 .wc-machine {
@@ -350,6 +351,14 @@
   content: '」';
   color: var(--pink-soft);
   font-weight: 900;
+}
+
+.is-en .wc-quote::before {
+  content: '“ ';
+}
+
+.is-en .wc-quote::after {
+  content: ' ”';
 }
 
 /* footer */

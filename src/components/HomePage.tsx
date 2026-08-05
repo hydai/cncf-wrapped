@@ -1,21 +1,23 @@
 import { useState, type FormEvent } from 'react';
 import { normalizeLogin } from '../api/devstats';
+import { useI18n } from '../i18n/context';
 
 const LOGIN_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/i;
 
 export function HomePage({ onSubmit }: { onSubmit: (login: string) => void }) {
+  const { t } = useI18n();
   const [value, setValue] = useState('');
-  const [error, setError] = useState<string | null>(null);
+  const [errorKind, setErrorKind] = useState<'empty' | 'invalid' | null>(null);
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
     const login = normalizeLogin(value);
     if (!login) {
-      setError('先輸入一個 GitHub ID 吧。');
+      setErrorKind('empty');
       return;
     }
     if (login.length > 39 || !LOGIN_RE.test(login)) {
-      setError('這看起來不像 GitHub ID（只能有字母、數字和 -）。');
+      setErrorKind('invalid');
       return;
     }
     onSubmit(login);
@@ -24,16 +26,12 @@ export function HomePage({ onSubmit }: { onSubmit: (login: string) => void }) {
   return (
     <main className="home">
       <div className="home-hero">
-        <span className="home-kicker">YOUR CLOUD-NATIVE YEAR, MEME-IFIED</span>
+        <span className="home-kicker">{t.homeKicker}</span>
         <h1 className="home-logo">
           <span className="home-logo-outline">CNCF</span>
           <span className="home-logo-solid">WRAPPED</span>
         </h1>
-        <p className="home-tag">
-          輸入 GitHub ID，把你這一年在 CNCF 的貢獻
-          <br />
-          做成一張可以炫耀（或自嘲）的迷因卡片。
-        </p>
+        <p className="home-tag">{t.homeTag}</p>
       </div>
 
       <form className="home-form" onSubmit={submit}>
@@ -44,9 +42,9 @@ export function HomePage({ onSubmit }: { onSubmit: (login: string) => void }) {
             value={value}
             onChange={(e) => {
               setValue(e.target.value);
-              setError(null);
+              setErrorKind(null);
             }}
-            placeholder="github-id（試試 hydai）"
+            placeholder={t.homePlaceholder}
             maxLength={40}
             autoFocus
             autoCapitalize="off"
@@ -56,21 +54,16 @@ export function HomePage({ onSubmit }: { onSubmit: (login: string) => void }) {
           />
         </label>
         <button className="btn" type="submit">
-          產生我的卡片 →
+          {t.homeSubmit}
         </button>
-        {error && <p className="home-error">{error}</p>}
+        {errorKind && <p className="home-error">{errorKind === 'empty' ? t.errEmpty : t.errInvalid}</p>}
       </form>
 
       <button className="home-sample" onClick={() => onSubmit('hydai')}>
-        還沒想好？先看範例卡片 →
+        {t.homeSample}
       </button>
 
-      <p className="home-note">
-        只計算 CNCF 專案的貢獻 ・ 資料來源{' '}
-        <a href="https://devstats.cncf.io" target="_blank" rel="noreferrer">
-          devstats.cncf.io
-        </a>
-      </p>
+      <p className="home-note">{t.homeNote}</p>
     </main>
   );
 }

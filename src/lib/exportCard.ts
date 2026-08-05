@@ -82,7 +82,7 @@ export function canShareFiles(): boolean {
   );
 }
 
-export async function shareCard(node: HTMLElement, login: string): Promise<void> {
+export async function shareCard(node: HTMLElement, login: string, text: string): Promise<void> {
   const blob = await cardToPngBlob(node);
   const file = new File([blob], exportFileName(login), { type: 'image/png' });
   if (!navigator.canShare({ files: [file] })) {
@@ -91,6 +91,6 @@ export async function shareCard(node: HTMLElement, login: string): Promise<void>
   await navigator.share({
     files: [file],
     title: 'CNCF Wrapped',
-    text: `我的 CNCF Wrapped：@${login}`,
+    text,
   });
 }

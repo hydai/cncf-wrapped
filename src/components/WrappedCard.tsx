@@ -1,4 +1,5 @@
 import type { WrappedData } from '../api/wrapped';
+import { useI18n } from '../i18n/context';
 import { formatNumber } from '../lib/format';
 import { formatTopPercent } from '../lib/percentile';
 import { TITLES } from '../lib/titles';
@@ -39,13 +40,17 @@ export function WrappedCard({
   memeLine: string;
   cardRef?: React.Ref<HTMLDivElement>;
 }) {
+  const { lang, t } = useI18n();
   const { career, yearly, title } = data;
   const info = TITLES[title.id];
   const ranked = yearly.rank !== null;
   const hero = ranked ? `#${formatNumber(yearly.rank as number)}` : formatNumber(career.contributions);
+  const heroNote = ranked ? t.rankedNote(formatNumber(yearly.rankedTotal)) : t.unrankedNote;
+  // English titles stack word-per-line, Wrapped-poster style; Chinese stays on one line.
+  const titleLines = lang === 'en' ? info.en.split(' ') : [info.zh];
 
   return (
-    <div className="wrap-card" ref={cardRef}>
+    <div className={`wrap-card is-${lang}`} ref={cardRef}>
       <span className="wc-spark wc-spark-1">✦</span>
       <span className="wc-spark wc-spark-2">✦</span>
       <span className="wc-spark wc-spark-3">✦</span>
@@ -53,7 +58,7 @@ export function WrappedCard({
 
       <header className="wc-top">
         <span className="wc-brand">CNCF WRAPPED</span>
-        <span className="wc-range">LAST 365 DAYS</span>
+        <span className="wc-range">{t.cardRange}</span>
       </header>
 
       <div className="wc-id">
@@ -66,64 +71,52 @@ export function WrappedCard({
           <span className="wc-login" style={{ fontSize: loginFontSize(data.login) }}>
             @{data.login}
           </span>
-          <span className="wc-id-sub">雲原生年度成績單</span>
+          <span className="wc-id-sub">{t.cardIdSub}</span>
         </div>
       </div>
 
       <div className="wc-hero">
         <div className="wc-hero-main">
-          <span className="wc-hero-label">{ranked ? '年度排名 · ANNUAL RANK' : '生涯總貢獻 · ALL-TIME'}</span>
+          <span className="wc-hero-label">{ranked ? t.heroRankLabel : t.heroUnrankedLabel}</span>
           <span className="wc-hero-number" style={{ fontSize: heroFontSize(hero) }}>
             {hero}
           </span>
         </div>
         <div className="wc-hero-side">
-          {ranked ? (
-            <>
-              <span className="wc-chip">TOP {formatTopPercent(yearly.topPercent as number)}</span>
-              <span className="wc-hero-note">
-                of {formatNumber(yearly.rankedTotal)}
-                <br />
-                ranked contributors
-              </span>
-            </>
-          ) : (
-            <>
-              <span className="wc-chip wc-chip-ghost">潛水中</span>
-              <span className="wc-hero-note">
-                未達年度排行榜門檻
-                <br />
-                默默耕耘型選手
-              </span>
-            </>
-          )}
+          <span className={`wc-chip${ranked ? '' : ' wc-chip-ghost'}`}>
+            {ranked ? t.topChip(formatTopPercent(yearly.topPercent as number)) : t.lurkChip}
+          </span>
+          <span className="wc-hero-note">
+            {heroNote[0]}
+            <br />
+            {heroNote[1]}
+          </span>
         </div>
       </div>
 
       <div className="wc-grid">
         <Stat
-          label="年度貢獻 · 1Y"
+          label={t.statYearly}
           value={yearly.contributions !== null ? formatNumber(yearly.contributions) : '—'}
           tone="lime"
         />
-        <Stat label="生涯貢獻 · ALL-TIME" value={formatNumber(career.contributions)} tone="blue" />
-        <Stat label="生涯 PULL REQUESTS" value={formatNumber(career.prs)} tone="pink" />
-        <Stat label="生涯 ISSUES" value={formatNumber(career.issues)} tone="orange" />
+        <Stat label={t.statAllTime} value={formatNumber(career.contributions)} tone="blue" />
+        <Stat label={t.statPrs} value={formatNumber(career.prs)} tone="pink" />
+        <Stat label={t.statIssues} value={formatNumber(career.issues)} tone="orange" />
       </div>
 
       <div className="wc-title">
-        <span className="wc-title-label">你的稱號 · YOUR TITLE</span>
+        <span className="wc-title-label">{t.titleLabel}</span>
         <div className="wc-title-row">
           <span className="wc-title-emoji">{info.emoji}</span>
           <div className="wc-title-text">
             <span className="wc-title-en">
-              {info.en.split(' ').map((word) => (
-                <span key={word} className="wc-title-word">
-                  {word}
+              {titleLines.map((line) => (
+                <span key={line} className={`wc-title-word${lang === 'zh' ? ' wc-title-word-zh' : ''}`}>
+                  {line}
                 </span>
               ))}
             </span>
-            <span className="wc-title-zh">「{info.zh}」</span>
           </div>
           {title.machine && <span className="wc-machine">⚡ THE MACHINE</span>}
         </div>
@@ -132,7 +125,7 @@ export function WrappedCard({
 
       <footer className="wc-foot">
         <span className="wc-foot-url">{SITE_HOST}</span>
-        <span className="wc-foot-cta">產生你的卡片 →</span>
+        <span className="wc-foot-cta">{t.footCta}</span>
       </footer>
     </div>
   );

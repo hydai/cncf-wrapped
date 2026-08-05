@@ -1,20 +1,24 @@
 import { useMemo, useRef } from 'react';
-import { useWrapped } from '../hooks/useWrapped';
 import { useFitScale } from '../hooks/useFitScale';
-import { pickMemeLine } from '../lib/copy';
+import { useWrapped } from '../hooks/useWrapped';
+import { useI18n } from '../i18n/context';
+import { getMemeLine, pickMemeLineIndex } from '../lib/copy';
 import { CARD_WIDTH, WrappedCard } from './WrappedCard';
 import { ExportBar } from './ExportBar';
 import { ErrorScreen, LoadingScreen, NotFoundScreen } from './StatusScreens';
 
 export function CardPage({ login, onNavigate }: { login: string; onNavigate: (login: string | null) => void }) {
+  const { lang, t } = useI18n();
   const { state, retry } = useWrapped(login);
   const { ref, scale } = useFitScale(CARD_WIDTH);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  const memeLine = useMemo(
-    () => (state.phase === 'ok' ? pickMemeLine(state.data.title.id) : ''),
+  // Pick the joke once per load; language switches translate it instead of re-rolling.
+  const memeIndex = useMemo(
+    () => (state.phase === 'ok' ? pickMemeLineIndex(state.data.title.id) : 0),
     [state],
   );
+  const memeLine = state.phase === 'ok' ? getMemeLine(state.data.title.id, memeIndex, lang) : '';
 
   return (
     <>
@@ -44,7 +48,7 @@ export function CardPage({ login, onNavigate }: { login: string; onNavigate: (lo
         <>
           <ExportBar getNode={() => cardRef.current} login={state.data.login} />
           <button className="card-switch" onClick={() => onNavigate(null)}>
-            換一個 GitHub ID →
+            {t.switchUser}
           </button>
         </>
       )}
