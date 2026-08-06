@@ -54,12 +54,19 @@ Spotify Wrapped 風格的卡片，一鍵下載 / 複製 PNG，貼到 X、Slack�
 | 全站數字 | `SiteStats` |
 
 - **排名**由 DevStats 計算，本站原樣呈現、不加工。
-- **上榜總數**是排行榜長度——榜單有貢獻門檻、低於門檻不入榜，所以遠小於
-  全站 contributors 總數。
+- **「Contributions」**是七種 GitHub 事件的計數（push、PR、issue、PR
+  review 與三種留言）——一次 push 不論夾帶幾個 commits 都只算 1 次，所以
+  年度 Commits 數可能大於年度 Contributions 數；bot 帳號由上游排除。
+- **上榜總數**是排行榜長度——榜單有貢獻門檻（隨專案規模與時間範圍縮放的
+  動態公式，由上游計算）、低於門檻不入榜，所以遠小於全站 contributors
+  總數。
 - **Top X%** = 排名 ÷ 上榜總數 × 100，無條件進位到小數一位（寧可低估、
   不誇大），語意是「上榜貢獻者中的百分位」，不是全體 CNCF 貢獻者。
 - 榜外使用者只顯示貢獻數，不顯示排名與百分比。
 - DevStats 約每小時更新；本站另以 localStorage 快取 1 小時。
+- 一切可稽核：排名的完整計算 SQL 在
+  [cncf/devstats](https://github.com/cncf/devstats/blob/master/metrics/shared/project_developer_stats.sql)
+  開源，本站前端程式碼也開源。
 
 每張卡片下方也有 ℹ️「這些數字怎麼算」說明區塊。
 

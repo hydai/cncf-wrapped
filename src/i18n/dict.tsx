@@ -185,8 +185,12 @@ const zh: Dict = {
       body: '直接來自 CNCF DevStats 的 DevActCnt API（All CNCF ・ 過去一年 ・ Contributions）。排名由 DevStats 計算，本站原樣呈現、不加工。',
     },
     {
+      term: '「Contributions」算什麼',
+      body: '不是 commits + PRs 的加總，而是七種 GitHub 事件的計數：push、PR、issue、PR review、commit 留言、issue 留言、review 留言。一次 push 不論夾帶幾個 commits 都只算 1 次貢獻——所以年度 Commits 數大於年度 Contributions 數是正常的。',
+    },
+    {
       term: '上榜貢獻者總數',
-      body: '同一個 API 不指定 github_id 時回傳的排行榜長度。榜單有貢獻門檻、低於門檻不入榜，所以這個數字遠小於全站 contributors 總數。',
+      body: '同一個 API 不指定 github_id 時回傳的排行榜長度。榜單有貢獻門檻、低於門檻不入榜，所以這個數字遠小於全站 contributors 總數；門檻不是固定值，而是隨專案規模與時間範圍縮放的公式（貢獻數 > 10 × 專案規模 × √(range/1450)），由上游計算。',
     },
     {
       term: 'TOP X%',
@@ -197,6 +201,10 @@ const zh: Dict = {
       body: '未達門檻就不顯示排名與百分比，只顯示貢獻數——默默耕耘也是貢獻。',
     },
     {
+      term: 'Bot 排除',
+      body: '上游所有統計都套用機器人排除清單——bot 帳號不進榜、也不計入任何數字。',
+    },
+    {
       term: '資料來源',
       body: (
         <>
@@ -204,6 +212,26 @@ const zh: Dict = {
             devstats.cncf.io
           </a>
           ，資料約每小時更新；本站另有 1 小時快取，所以你剛拿到的 merge 可能要晚一點才會入帳。
+        </>
+      ),
+    },
+    {
+      term: '開源可稽核',
+      body: (
+        <>
+          排名的完整計算 SQL 在 cncf/devstats 開源（
+          <a
+            href="https://github.com/cncf/devstats/blob/master/metrics/shared/project_developer_stats.sql"
+            target="_blank"
+            rel="noreferrer"
+          >
+            project_developer_stats.sql
+          </a>
+          ），本站前端程式碼也開源（
+          <a href="https://github.com/hydai/cncf-wrapped" target="_blank" rel="noreferrer">
+            hydai/cncf-wrapped
+          </a>
+          ）。有疑問，都查得到。
         </>
       ),
     },
@@ -330,8 +358,12 @@ const en: Dict = {
       body: 'Straight from the CNCF DevStats DevActCnt API (All CNCF · last year · Contributions). DevStats computes it; this site just displays it.',
     },
     {
+      term: 'What "Contributions" counts',
+      body: 'Not commits + PRs. It counts seven GitHub event types: pushes, PRs, issues, PR reviews, commit comments, issue comments and review comments. One push counts as one contribution no matter how many commits it carries — so yearly Commits exceeding yearly Contributions is perfectly normal.',
+    },
+    {
       term: 'Ranked contributors',
-      body: 'The number of rows the same API returns without a github_id. The leaderboard cuts off below a contribution threshold, so it is far smaller than the site-wide contributor count.',
+      body: 'The number of rows the same API returns without a github_id. The leaderboard cuts off below a contribution threshold, so it is far smaller than the site-wide contributor count; the cutoff is not a fixed number but a formula scaling with project size and time range (value > 10 × project scale × √(range/1450)), computed upstream.',
     },
     {
       term: 'Top X%',
@@ -342,6 +374,10 @@ const en: Dict = {
       body: 'Below the cutoff there is no rank and no percentile — just contribution counts. Lurking is still contributing.',
     },
     {
+      term: 'Bots excluded',
+      body: 'Upstream applies a bot exclusion list to every stat — bot accounts neither rank nor count.',
+    },
+    {
       term: 'Data',
       body: (
         <>
@@ -349,6 +385,26 @@ const en: Dict = {
             devstats.cncf.io
           </a>
           , refreshed roughly every hour; this site caches responses for another hour, so a fresh merge may take a moment to land.
+        </>
+      ),
+    },
+    {
+      term: 'Open & auditable',
+      body: (
+        <>
+          The full ranking SQL is open source in cncf/devstats (
+          <a
+            href="https://github.com/cncf/devstats/blob/master/metrics/shared/project_developer_stats.sql"
+            target="_blank"
+            rel="noreferrer"
+          >
+            project_developer_stats.sql
+          </a>
+          ), and so is this site (
+          <a href="https://github.com/hydai/cncf-wrapped" target="_blank" rel="noreferrer">
+            hydai/cncf-wrapped
+          </a>
+          ). Every number is checkable.
         </>
       ),
     },

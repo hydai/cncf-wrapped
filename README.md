@@ -61,14 +61,22 @@ the browser):
 | Site-wide stats | `SiteStats` |
 
 - **Rank** is computed by DevStats; this site displays it as-is.
+- **"Contributions"** counts seven GitHub event types (pushes, PRs, issues,
+  PR reviews and three kinds of comments) — one push counts once no matter
+  how many commits it carries, so yearly Commits can exceed yearly
+  Contributions. Bot accounts are excluded upstream.
 - **Ranked total** is the leaderboard length — DevStats cuts the board off
-  below a contribution threshold, so it is far smaller than the site-wide
-  contributor count.
+  below a contribution threshold (a dynamic formula scaling with project
+  size and time range, computed upstream), so it is far smaller than the
+  site-wide contributor count.
 - **Top X%** = rank ÷ ranked total × 100, rounded *up* to one decimal. It is
   a percentile among **ranked** contributors, not all CNCF contributors.
 - Unranked users get contribution counts only — no rank, no percentile.
 - DevStats refreshes roughly hourly; the site caches responses in
   localStorage for another hour.
+- Fully auditable: the ranking SQL lives in
+  [cncf/devstats](https://github.com/cncf/devstats/blob/master/metrics/shared/project_developer_stats.sql),
+  and this site's code is open source too.
 
 The same explanation ships in the ℹ️ “How the numbers work” section under
 every card.
