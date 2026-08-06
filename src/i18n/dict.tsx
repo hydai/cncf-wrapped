@@ -43,6 +43,9 @@ export interface Dict {
   nfBody: (login: string) => ReactNode;
   nfFine: string;
   nfAction: string;
+  nfJoinTitle: string;
+  nfJoinItems: Array<{ href: string; label: string; desc: string }>;
+  nfComeback: string;
   errTitle: string;
   errBody: ReactNode;
   errRetry: string;
@@ -142,20 +145,31 @@ const zh: Dict = {
   loadingFine: '免費的公共 API 有時需要想一下，請溫柔等待 🙏',
   nfTitle: (
     <>
-      404
+      這裡還沒有你的足跡
       <br />
-      查無此人
+      ——還沒而已
     </>
   ),
   nfBody: (login) => (
     <>
-      DevStats 翻遍了整個 CNCF，還是找不到 <strong>「{login}」</strong>。
+      DevStats 翻遍了整個 CNCF，沒找到 <strong>「{login}」</strong>。
       <br />
-      可能是拼錯字，也可能你的雲原生之旅根本還沒開始。
+      拼錯字了？改一個字母再試。真的還沒開始？
+      <br />
+      那你今天來得剛剛好。
     </>
   ),
   nfFine: '這裡只統計 CNCF 專案（Kubernetes、etcd、Envoy…）的貢獻，不是整個 GitHub。',
   nfAction: '換個 ID 再試 →',
+  nfJoinTitle: '你的雲原生之旅，可以從今天開始',
+  nfJoinItems: [
+    { href: 'https://contribute.cncf.io', label: 'contribute.cncf.io', desc: 'CNCF 官方貢獻者指南——從這裡開始' },
+    { href: 'https://slack.cncf.io', label: 'CNCF Slack', desc: '加入 Slack，跟社群搭上線' },
+    { href: 'https://clotributor.dev', label: 'CLOTributor', desc: '找一個適合新手的 good first issue' },
+    { href: 'https://github.com/cncf/mentoring', label: 'LFX Mentorship', desc: '有津貼的導師計畫，有人帶著做' },
+    { href: 'https://community.cncf.io', label: 'community.cncf.io', desc: '找在地聚會（KCD、meetup），見見真人' },
+  ],
+  nfComeback: '等你的第一個 PR 合併，回來領你的第一張卡 🎁',
   errTitle: 'DevStats 睡著了',
   errBody: (
     <>
@@ -315,20 +329,31 @@ const en: Dict = {
   loadingFine: 'free public APIs need a moment sometimes — be gentle 🙏',
   nfTitle: (
     <>
-      404
+      No footprints here yet
       <br />
-      NEVER HEARD OF 'EM
+      — <em>yet</em>
     </>
   ),
   nfBody: (login) => (
     <>
       DevStats searched every corner of the CNCF and found no trace of <strong>"{login}"</strong>.
       <br />
-      Either that's a typo, or your cloud-native era hasn't started yet.
+      Typo? Fix a letter and retry. Genuinely haven't started?
+      <br />
+      Then you showed up at exactly the right time.
     </>
   ),
   nfFine: 'Only CNCF projects count here (Kubernetes, etcd, Envoy…) — not all of GitHub.',
   nfAction: 'Try another ID →',
+  nfJoinTitle: 'Your cloud-native journey can start today',
+  nfJoinItems: [
+    { href: 'https://contribute.cncf.io', label: 'contribute.cncf.io', desc: "CNCF's official contributor guide — start here" },
+    { href: 'https://slack.cncf.io', label: 'CNCF Slack', desc: 'join the Slack and meet the community' },
+    { href: 'https://clotributor.dev', label: 'CLOTributor', desc: 'find a beginner-friendly good first issue' },
+    { href: 'https://github.com/cncf/mentoring', label: 'LFX Mentorship', desc: 'paid mentorships with a guide by your side' },
+    { href: 'https://community.cncf.io', label: 'community.cncf.io', desc: 'find a local meetup or KCD near you' },
+  ],
+  nfComeback: 'When your first PR merges, come back for your first card 🎁',
   errTitle: 'DevStats fell asleep',
   errBody: (
     <>

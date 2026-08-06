@@ -26,8 +26,8 @@ export function NotFoundScreen({ login, onHome }: { login: string; onHome: () =>
   const { t } = useI18n();
   return (
     <section className="status">
-      <span className="status-emoji" role="img" aria-label="ghost">
-        👻
+      <span className="status-emoji" role="img" aria-label="seedling">
+        🌱
       </span>
       <h2 className="status-title">{t.nfTitle}</h2>
       <p className="status-text">{t.nfBody(login)}</p>
@@ -36,6 +36,21 @@ export function NotFoundScreen({ login, onHome }: { login: string; onHome: () =>
         <button className="btn" onClick={onHome}>
           {t.nfAction}
         </button>
+      </div>
+
+      <div className="nf-join">
+        <h3 className="nf-join-title">{t.nfJoinTitle}</h3>
+        <ul className="nf-join-list">
+          {t.nfJoinItems.map(({ href, label, desc }) => (
+            <li key={href}>
+              <a href={href} target="_blank" rel="noreferrer">
+                {label}
+              </a>
+              <span> — {desc}</span>
+            </li>
+          ))}
+        </ul>
+        <p className="nf-comeback">{t.nfComeback}</p>
       </div>
     </section>
   );

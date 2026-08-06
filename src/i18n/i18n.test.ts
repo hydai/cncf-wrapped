@@ -44,4 +44,20 @@ describe('DICTS', () => {
       for (const item of dict.methodItems) expect(item.term.trim()).not.toBe('');
     }
   });
+
+  it('keeps not-found community links aligned and valid across languages', () => {
+    expect(DICTS.zh.nfJoinItems.length).toBe(DICTS.en.nfJoinItems.length);
+    expect(DICTS.zh.nfJoinItems.length).toBeGreaterThanOrEqual(3);
+    expect(DICTS.zh.nfJoinItems.length).toBeLessThanOrEqual(5);
+    DICTS.zh.nfJoinItems.forEach((item, i) => {
+      const en = DICTS.en.nfJoinItems[i];
+      // Same destination at the same index in both languages.
+      expect(en.href).toBe(item.href);
+      expect(item.href).toMatch(/^https:\/\//);
+      for (const entry of [item, en]) {
+        expect(entry.label.trim()).not.toBe('');
+        expect(entry.desc.trim()).not.toBe('');
+      }
+    });
+  });
 });

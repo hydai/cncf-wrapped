@@ -462,3 +462,62 @@ a {
   gap: 12px;
   margin-top: 8px;
 }
+
+/* ---------- not-found community invitation ---------- */
+
+.nf-join {
+  width: 100%;
+  margin-top: 10px;
+  padding-top: 18px;
+  border-top: 1px dashed rgba(255, 248, 242, 0.18);
+  text-align: left;
+}
+
+.nf-join-title {
+  margin: 0 0 10px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--lime);
+}
+
+.nf-join-list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.nf-join-list li {
+  list-style: none;
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(255, 248, 242, 0.62);
+}
+
+.nf-join-list li::before {
+  content: '→ ';
+  color: var(--pink-soft);
+  font-weight: 900;
+}
+
+.nf-join-list a {
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration-color: rgba(255, 248, 242, 0.35);
+  text-underline-offset: 3px;
+}
+
+.nf-join-list a:hover {
+  color: var(--lime);
+}
+
+.nf-comeback {
+  margin: 14px 0 0;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255, 248, 242, 0.85);
+}
