@@ -10,6 +10,21 @@ import './FortuneCard.css';
 
 export const FORTUNE_WIDTH = 430;
 
+/** Renders text so line breaks only ever happen at spaces, never inside a token. */
+function NoBreakTokens({ text }: { text: string }) {
+  const tokens = text.split(' ');
+  return (
+    <>
+      {tokens.map((token, i) => (
+        <Fragment key={i}>
+          <span className="fc-token">{token}</span>
+          {i < tokens.length - 1 && ' '}
+        </Fragment>
+      ))}
+    </>
+  );
+}
+
 function gradeFontSize(text: string, isEn: boolean): number {
   if (isEn) return text.length > 12 ? 21 : 26;
   return text.length <= 2 ? 40 : 30;
@@ -52,7 +67,7 @@ export function FortuneCard({
         <div className="fc-date">
           {dateDisplay}
           <br />
-          {t.fortuneAlmanac(sexagenaryYear(year))}
+          <NoBreakTokens text={t.fortuneAlmanac(sexagenaryYear(year))} />
         </div>
       </div>
 
@@ -108,7 +123,9 @@ export function FortuneCard({
       <div className="fc-lucky">
         <div className="fc-lk">
           <div className="fc-lk-k">{t.fortuneLuckyCmd}</div>
-          <div className="fc-lk-v fc-lk-cmd">{cmd}</div>
+          <div className="fc-lk-v fc-lk-cmd">
+            <NoBreakTokens text={cmd} />
+          </div>
           <div className="fc-lk-n">{note[lang]}</div>
         </div>
         <div className="fc-lk">

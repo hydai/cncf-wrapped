@@ -249,8 +249,13 @@
 }
 
 .fc-lk-cmd {
+  /* Break between tokens only — never inside one (12.5px fits '--oneline'). */
   font-size: 12.5px;
-  word-break: break-all;
+  line-height: 1.4;
+}
+
+.fc-token {
+  white-space: nowrap;
 }
 
 .fc-lk-emoji {
